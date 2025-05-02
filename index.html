@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اعتراف Valentine - لشمس</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+        
+        :root {
+            --primary: #FF5252;
+            --secondary: #FFD740;
+            --accent: #7C4DFF;
+            --bg: #0F0C29;
+            --text: #FFFFFF;
+            --sun: #FFC107;
+            --jupiter: #FFA726;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at center, #302B63 0%, #24243E 50%, #0F0C29 100%),
+                url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="1" fill="white" opacity="0.2"/></svg>');
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 20px;
+            padding: 30px;
+            background-color: rgba(15, 12, 41, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(233, 30, 99, 0.5);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--primary);
+            backdrop-filter: blur(5px);
+            z-index: 10;
+        }
+        
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(233, 30, 99, 0.8);
+            position: relative;
+        }
+        
+        .space-objects {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+        
+        .sun {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--sun), #FF9800);
+            border-radius: 50%;
+            filter: blur(1px) drop-shadow(0 0 20px var(--sun));
+            animation: pulse 4s infinite alternate;
+            top: -50px;
+            right: -50px;
+        }
+        
+        .jupiter {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--jupiter), #FB8C00);
+            border-radius: 50%;
+            filter: blur(1px) drop-shadow(0 0 15px var(--jupiter));
+            bottom: -40px;
+            left: -40px;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .characters {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            margin: 40px 0;
+        }
+        
+        .character {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .character-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(233, 30, 99, 0.3);
+            font-size: 50px;
+        }
+        
+        .character p {
+            margin-top: 10px;
+            font-weight: bold;
+            color: var(--secondary);
+            background-color: rgba(156, 39, 176, 0.2);
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .message {
+            background-color: rgba(233, 30, 99, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 1px solid var(--primary);
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            box-shadow: 0 0 15px rgba(233, 30, 99, 0.3);
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .btn:hover::before {
+            opacity: 1;
+        }
+        
+        .btn:active {
+            transform: scale(0.95);
+        }
+        
+        .btn-accept {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-reject {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: rgba(15, 12, 41, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px rgba(233, 30, 99, 0.5);
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .modal-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .modal-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .modal-btn-change {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .modal-btn-insist {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: var(--primary);
+            opacity: 0;
+            animation: heartFloat 4s infinite;
+            filter: drop-shadow(0 0 5px rgba(233, 30, 99, 0.8));
+        }
+        
+        @keyframes heartFloat {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+        
+        .no-reject {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 12, 41, 0.95);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+            display: none;
+            border: 3px solid var(--primary);
+            backdrop-filter: blur(5px);
+        }
+        
+        .no-reject h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(233, 30, 99, 0.8);
+        }
+        
+        .no-reject p {
+            margin-bottom: 30px;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+        
+        .no-reject-btn {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+        
+        .no-reject-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .no-reject-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .attempts-counter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(233, 30, 99, 0.3);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(233, 30, 99, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 100;
+            border: 1px solid white;
+        }
+        
+        .audio-control i {
+            color: white;
+            font-size: 20px;
+        }
+        
+        .audio-player {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background-color: rgba(15, 12, 41, 0.9);
+            padding: 10px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary);
+            z-index: 100;
+            width: 200px;
+        }
+        
+        .audio-title {
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        audio {
+            width: 100%;
+            height: 40px;
+        }
+        
+        .audio-close {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="space-objects" id="spaceObjects">
+            <div class="sun"></div>
+            <div class="jupiter"></div>
+        </div>
+        
+        <h1> شمس... عندي كلام مهم الج! 💌</h1>
+        
+        <div class="characters">
+            <div class="character">
+                <div class="character-avatar">👩🏻</div>
+                <p>شمس</p>
+            </div>
+            <div class="character">
+                <div class="character-avatar">🧑🏻</div>
+                <p>أنا</p>
+            </div>
+        </div>
+        
+        <div class="message">
+            <p>شمس،
+                أنا طالب هندسة أمن سيبراني، وأنتِ خريجة علوم كيمياء، يعني إحنا حرفيًا معادلة معقدة تحتاج لتوازن مثالي! الفرق بينا خمس سنين؟ هذا مجرد عامل محفّز يزيد من قوة التفاعل بيننا.
+                إذا جانت مشاعري مثل الكيمياء، فأنتِ العنصر النادر اللي يخلّي كل شيء مستقر، وأني ذاك الإلكترون اللي يدور داير مدايرج بدون ما يوكف. فا تطيني فرصة نصير تفاعل كيميائي ناجح بدل ما ننتظر المعادلة تستقر؟ 😏🔥
+                </p>
+    
+        </div>
+        
+        <div class="buttons">
+            <button class="btn btn-accept" id="acceptBtn">أي ليش لا! 💖</button>
+            <button class="btn btn-reject" id="rejectBtn">لالا مستحيل! 😒</button>
+        </div>
+        
+        <div class="hearts" id="hearts"></div>
+    </div>
+    
+    <div class="modal" id="rejectModal">
+        <div class="modal-content">
+            <div class="attempts-counter" id="attemptsCounter">المحاولة: 1/7</div>
+            <h2 id="modalMessage">شمس، تشاقين؟ لأن رفضج صار مثل مراوغات ميسي، كل مرة أفكر كدرت أتجاوزه، تجين بحركة تخليني أرجع للبداية!! 🥘</h2>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-change" id="changeMindBtn">خلاص غيرت رأيي! 😊</button>
+                <button class="modal-btn modal-btn-insist" id="insistRejectBtn">لا باقي على رفضي! 😤</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="no-reject" id="noReject">
+        <h2>ERORR 404 ❌</h2>
+        <p> ماكو رفض للأسف 🙄<br> شمس، إذا النظام شال زر الرفض، فهذا يعني إما تحديث جاري أو مجرد خطأ تقني وأني لازم أستغلّه بسرعة!</p>
+        <button class="no-reject-btn" id="noRejectBtn">خلاص ماكو غير انو توافقين اعتذر! </button>
+    </div>
+    
+    <div class="audio-control" id="audioControl">
+        <i class="fas fa-music"></i>
+    </div>
+    
+    <div class="audio-player" id="audioPlayer" style="display: none;">
+        <button class="audio-close" id="audioClose">&times;</button>
+        <div class="audio-title">CAS - أغنية Valentine</div>
+        <audio id="bgMusic" controls>
+            <source src="C:/Users/Orbit/Downloads/Cigarettes After Sex - K. (Instrumental).mp3" type="audio/mp3">
+            متصفحك لا يدعم مشغل الصوت.
+        </audio>
+    </div>
+    
+    <!-- Audio Elements -->
+    <audio id="clickSound">
+        <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="rejectSound">
+        <source src="https://www.soundjay.com/mechanical/sounds/boing-1.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        const persuasiveMessages = [
+            "شمس، تشاقين؟ لأن رفضج صار مثل مراوغات ميسي، كل مرة أفكر قدرت أتجاوزه، تجين بحركة تخليني أرجع للبداية! ",
+            "شمس، لا ترفضين، لأن رفضج صار مثل حكم ظالم بالمباراة، حتى الجمهور يطالبج ترجعين لل VAR!",
+            "شمس، للمرة الثالثة، رفضج صار مثل مسلسل You... كل موسم جديد يوهمني إن القصة راح تتغير، بس النهاية تبقى نفس الكارثة العاطفية!",
+            "شمس، مو صار خمس سنين أحبج، لو الحب ينحسب مثل الأمن السيبراني، جان صار عندي نظام حماية مشاعر ضد كل محاولات الاختراق... بس المشكلة؟ أنتِ وحدج عندج كلمة السر 😉",
+            "شمس، الحب مثل كلاسيكو إسبانيا، مرات أحس إنو اكو أمل، بس فجأة تجين مثل ميسي أيام عزه، تخليني أدور على أعذار للهزيمة!",
+        ];
+        
+        let currentMessageIndex = 0;
+        let rejectAttempts = 0;
+        const maxAttempts = 5;
+        
+        // Audio elements
+        const clickSound = document.getElementById('clickSound');
+        const rejectSound = document.getElementById('rejectSound');
+        const audioControl = document.getElementById('audioControl');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const audioClose = document.getElementById('audioClose');
+        const bgMusic = document.getElementById('bgMusic');
+        
+        // Create stars
+        function createStars() {
+            const spaceObjects = document.getElementById('spaceObjects');
+            
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                spaceObjects.appendChild(star);
+            }
+        }
+        
+        // Create hearts
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            heartsContainer.innerHTML = '';
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 4 + 's';
+                heart.innerHTML = '❤️';
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Audio control
+        audioControl.addEventListener('click', function() {
+            clickSound.play();
+            audioPlayer.style.display = audioPlayer.style.display === 'none' ? 'flex' : 'none';
+        });
+        
+        audioClose.addEventListener('click', function() {
+            clickSound.play();
+            audioPlayer.style.display = 'none';
+        });
+        
+        // Start music quietly when player is shown
+        audioPlayer.addEventListener('click', function(e) {
+            if(e.target === bgMusic) {
+                bgMusic.volume = 0.3;
+            }
+        });
+        
+        document.getElementById('rejectBtn').addEventListener('click', function() {
+            clickSound.play();
+            const modal = document.getElementById('rejectModal');
+            document.getElementById('modalMessage').textContent = persuasiveMessages[currentMessageIndex % persuasiveMessages.length];
+            document.getElementById('attemptsCounter').textContent = `المحاولة: ${rejectAttempts+1}/${maxAttempts}`;
+            modal.style.display = 'flex';
+            
+            currentMessageIndex++;
+        });
+        
+        document.getElementById('changeMindBtn').addEventListener('click', function() {
+            clickSound.play();
+            document.getElementById('rejectModal').style.display = 'none';
+            showAcceptance();
+        });
+        
+        document.getElementById('insistRejectBtn').addEventListener('click', function() {
+            clickSound.play();
+            rejectSound.play();
+            rejectAttempts++;
+            document.getElementById('attemptsCounter').textContent = `المحاولة: ${rejectAttempts+1}/${maxAttempts}`;
+            
+            if(rejectAttempts >= maxAttempts) {
+                document.getElementById('rejectModal').style.display = 'none';
+                document.getElementById('noReject').style.display = 'flex';
+            } else {
+                document.getElementById('modalMessage').textContent = persuasiveMessages[currentMessageIndex % persuasiveMessages.length];
+                currentMessageIndex++;
+            }
+        });
+        
+        document.getElementById('noRejectBtn').addEventListener('click', function() {
+            clickSound.play();
+            document.getElementById('noReject').style.display = 'none';
+            showAcceptance();
+        });
+        
+        document.getElementById('acceptBtn').addEventListener('click', function() {
+            clickSound.play();
+            showAcceptance();
+        });
+        
+        function showAcceptance() {
+            document.getElementById('rejectModal').style.display = 'none';
+            document.getElementById('noReject').style.display = 'none';
+            
+            const container = document.querySelector('.container');
+            container.innerHTML = `
+                <div class="space-objects" id="spaceObjects">
+                    <div class="sun"></div>
+                    <div class="jupiter"></div>
+                </div>
+                <h1>نهاية غير متوقعة: البطل (أنا) يحصل على القبول الرسمي بعد سنوات من المحاولات!</h1>
+                
+                <div class="characters">
+                    <div class="character">
+                        <div class="character-avatar">👩🏻</div>
+                        <p>شمس</p>
+                    </div>
+                    <div class="character">
+                        <div class="character-avatar">🧑🏻</div>
+                        <p>أنا</p>
+                    </div>
+                </div>
+                
+                <div class="message">
+                    <p>لا لا، أكيد اكو خطأ بالنظام، لازم أعيد تحديث مشاعري، لأن قلبي للان متعوّد يقرأ رسالة 'تم رفضك بكل احترام'!</p>
+                    <p>لحظة، هذا حقيقي؟ شمس وافقت؟ هل الأرض وكفت عن الدوران؟ هل ريال مدريد فاز بخمس كلاسيكوهات متتالية؟!</p>
+                    <p>شمس، راح أكون بكد المسؤولية مثل جو من You، بس الفرق؟ خططي أخلاقية، وما تحتاج تحقيقات جنائية 😉!</p>
+                </div>
+                
+                <div class="hearts" id="hearts"></div>
+            `;
+            
+            createStars();
+            createHearts();
+        }
+        
+        // Initial setup
+        createStars();
+        createHearts();
+    </script>
+</body>
+</html>
